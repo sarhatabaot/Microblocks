@@ -48,28 +48,9 @@ public class GiveMBCommand extends Command {
     public boolean execute(@NotNull final CommandSender sender, @NotNull final String commandLabel, @NotNull final String[] args) {
         this.sender = sender;
         switch (args.length) {
-            //TODO: 2 & 3 are super similar (only difference is the amount and some messages)
             case 2:
-                Player receiver = Bukkit.getPlayerExact(args[0]);
-                if (receiver != null && args[0].length() < 20) {
-                    if (Types.BLOCK_MAP.containsKey(args[1].toLowerCase())) {
-                        MicroBlocksType mbt = Types.BLOCK_MAP.get(args[1].toLowerCase());
-                        this.addMB(receiver, mbt.getPlayerName(), mbt.isSafe(), mbt.getBlockName(), 1);
-                        if (mbt.getBlockName().equalsIgnoreCase("parrot")) {
-                            Common.tell(receiver, "&6This microblock is &7diagonal &6.");
-                        }
-
-                        tell("&6You have given &7" + args[0] + " &6the &7" + args[1] + " &6microblock.");
-                    } else {
-                        tell("&cUnknown microblock");
-                        tell("&cUse /mb for a list of microblocks");
-                    }
-                } else {
-                    tell("&c'" + args[0] + "' is not online or is an invalid player name");
-                }
-                return true;
             case 3:
-                receiver = Bukkit.getPlayerExact(args[0]);
+                Player receiver = Bukkit.getPlayerExact(args[0]);
                 if (receiver != null && args[0].length() < 20) {
                     if (Types.BLOCK_MAP.containsKey(args[1].toLowerCase())) {
                         MicroBlocksType mbt = Types.BLOCK_MAP.get(args[1].toLowerCase());
@@ -79,9 +60,15 @@ public class GiveMBCommand extends Command {
                                 Common.tell(receiver, "&6This microblock is &7diagonal &6.");
                             }
                             tell("&6You have given &7" + args[0] +"&6 "+args[2]+ " &6of the &7" + args[1] + " &6microblock.");
-                        } catch (NumberFormatException exception) {
-                            tell("&c'"+args[2]+"' is not a valid number.");
+                        } catch (NumberFormatException|ArrayIndexOutOfBoundsException exception) {
+                            this.addMB(receiver, mbt.getPlayerName(), mbt.isSafe(), mbt.getBlockName(), 1);
+                            if (mbt.getBlockName().equalsIgnoreCase("parrot")) {
+                                Common.tell(receiver, "&6This microblock is &7diagonal &6.");
+                            }
+                            tell("&6You have given &7" + args[0] +"&6 1 &6of the &7" + args[1] + " &6microblock.");
                         }
+
+
                     } else {
                         tell("&cUnknown microblock");
                         tell("&cUse /mb for a list of microblocks");
@@ -98,10 +85,15 @@ public class GiveMBCommand extends Command {
     @Override
     public @NotNull List<String> tabComplete(@NotNull final CommandSender sender, @NotNull final String alias, @NotNull final String[] args) throws IllegalArgumentException {
         List<String> completions = new ArrayList<>();
-
-        for (final String key : Types.BLOCK_MAP.keySet()) {
-            if (key.startsWith(args[1])) {
-                completions.add(key);
+        for(final Player player: Bukkit.getOnlinePlayers()){
+            if(player.getName().startsWith(args[0]))
+                completions.add(player.getName());
+        }
+        if(args.length > 1) {
+            for (final String key : Types.BLOCK_MAP.keySet()) {
+                if (key.startsWith(args[1])) {
+                    completions.add(key);
+                }
             }
         }
 
