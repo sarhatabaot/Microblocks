@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.itscrafted</groupId>
     <artifactId>Microblocks</artifactId>
-    <version>2.3-TI-BETA</version>
+    <version>2.3-BETA</version>
     <packaging>jar</packaging>
     <description>Extra building blocks and player heads.</description>
 
