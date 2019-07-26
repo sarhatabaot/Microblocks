@@ -3,11 +3,10 @@ package net.itscrafted.microblocks.command;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import net.itscrafted.microblocks.Common;
-import net.itscrafted.microblocks.MicroblockType;
+import net.itscrafted.microblocks.MicroBlocksType;
 import net.itscrafted.microblocks.MicroBlocks;
 import net.itscrafted.microblocks.Types;
 import org.bukkit.Bukkit;
@@ -67,7 +66,7 @@ public class GiveMBCommand extends Command {
                 Player receiver = Bukkit.getPlayerExact(args[0]);
                 if (receiver != null && args[0].length() < 20) {
                     if (Types.BLOCK_MAP.containsKey(args[1].toLowerCase())) {
-                        MicroblockType mbt = Types.BLOCK_MAP.get(args[1].toLowerCase());
+                        MicroBlocksType mbt = Types.BLOCK_MAP.get(args[1].toLowerCase());
                         this.addMB(receiver, mbt.getPlayerName(), mbt.isSafe(), mbt.getBlockName(), 1);
                         if (mbt.getBlockName().equalsIgnoreCase("parrot")) {
                             Common.tell(receiver, "&6This microblock is &7diagonal &6.");
@@ -86,7 +85,7 @@ public class GiveMBCommand extends Command {
                 receiver = Bukkit.getPlayerExact(args[0]);
                 if (receiver != null && args[0].length() < 20) {
                     if (Types.BLOCK_MAP.containsKey(args[1].toLowerCase())) {
-                        MicroblockType mbt = Types.BLOCK_MAP.get(args[1].toLowerCase());
+                        MicroBlocksType mbt = Types.BLOCK_MAP.get(args[1].toLowerCase());
                         try {
                             this.addMB(receiver, mbt.getPlayerName(), mbt.isSafe(), mbt.getBlockName(), Integer.parseInt(args[2]));
                             if (mbt.getBlockName().equalsIgnoreCase("parrot")) {
