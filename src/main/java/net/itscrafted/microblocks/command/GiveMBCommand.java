@@ -69,7 +69,7 @@ public class GiveMBCommand extends Command {
                     this.addMB(receiver, mbt.getPlayerName(), mbt.isSafe(), mbt.getBlockName(), 1);
                     tell("&6You have given &7" + args[0] + "&6 1 &6of the &7" + args[1] + " &6microblock.");
                 }
-                
+
                 return true;
             default:
                 return false;
