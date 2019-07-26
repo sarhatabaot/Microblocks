@@ -1,7 +1,7 @@
 package net.itscrafted.microblocks.command;
 
 import io.github.thebusybiscuit.cscorelib2.skull.SkullItem;
-import net.itscrafted.microblocks.MicroblockType;
+import net.itscrafted.microblocks.MicroBlocksType;
 import net.itscrafted.microblocks.MicroBlocks;
 import net.itscrafted.microblocks.Types;
 import org.bukkit.Bukkit;
@@ -22,8 +22,6 @@ public class MicroBlocksCommand extends PlayerCommand {
     private String[] secondPage;
     private int totalLength;
 
-    private final Logger logger;
-
     public MicroBlocksCommand() {
         super("microblocks");
         setAliases(Arrays.asList("mb", "miniblocks", "micro"));
@@ -36,8 +34,6 @@ public class MicroBlocksCommand extends PlayerCommand {
         Arrays.sort(this.blocks);
         this.secondPage = Arrays.copyOfRange(this.blocks, this.totalLength / 2, this.totalLength);
         this.blocks = Arrays.copyOfRange(this.blocks, 0, this.totalLength / 2);
-
-        logger = MicroBlocks.getInstance().getLogger();
     }
 
     private static String arrayToString(String[] array) {
@@ -52,7 +48,6 @@ public class MicroBlocksCommand extends PlayerCommand {
         }
     }
 
-    @Deprecated
     private ItemStack mblock(String headName, String microblock) {
         ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta meta = (SkullMeta) playerHead.getItemMeta();
@@ -63,16 +58,6 @@ public class MicroBlocksCommand extends PlayerCommand {
         return playerHead;
     }
 
-    private ItemStack mblock(UUID uuid, String microblock) {
-        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-        ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD);
-        SkullMeta meta = (SkullMeta) playerHead.getItemMeta();
-        meta.setDisplayName(ChatColor.GOLD + "Microblock: " + ChatColor.WHITE + microblock);
-        meta.setLore(Collections.singletonList(ChatColor.GRAY + "Smaller than a block."));
-        meta.setOwningPlayer(offlinePlayer);
-        playerHead.setItemMeta(meta);
-        return playerHead;
-    }
 
     private ItemStack mblock(UUID uuid, String microblock, String texture) {
         ItemStack head = SkullItem.fromBase64(uuid, texture);
@@ -83,7 +68,6 @@ public class MicroBlocksCommand extends PlayerCommand {
         return head;
     }
 
-    @Deprecated
     public void addMB(Player p, String headName, boolean safe, String microblock) {
         if (MicroBlocks.getInstance().getConfig().getBoolean("safe-mode") && !safe) {
             tell("&6This is an &cunsafe head &6, you cannot use it.", "&6If you wish to use it, disable &c'safe-mode' &6in the config.");
@@ -93,14 +77,6 @@ public class MicroBlocksCommand extends PlayerCommand {
         }
     }
 
-    public void addMB(Player p, UUID uuid, boolean safe, String microblock) {
-        if (MicroBlocks.getInstance().getConfig().getBoolean("safe-mode") && !safe) {
-            tell("&6This is an &cunsafe head &6, you cannot use it.", "&6If you wish to use it, disable &c'safe-mode' &6in the config.");
-        } else {
-            p.getInventory().addItem(mblock(uuid, microblock));
-            tell("&6You have been given the &7" + microblock + " &6microblock.");
-        }
-    }
 
     public void addMB(Player p, UUID uuid, String microblock, String texture) {
         p.getInventory().addItem(mblock(uuid, microblock, texture));
@@ -147,7 +123,7 @@ public class MicroBlocksCommand extends PlayerCommand {
                 return;
             default:
                 if (Types.BLOCK_MAP.containsKey(args[0].toLowerCase())) {
-                    MicroblockType mbt = Types.BLOCK_MAP.get(args[0].toLowerCase());
+                    MicroBlocksType mbt = Types.BLOCK_MAP.get(args[0].toLowerCase());
                     if (mbt.getPlayerName() == null) {
                         addMB(player,mbt.getUuid(),mbt.getBlockName(),mbt.getTexture());
                         return;
@@ -160,7 +136,7 @@ public class MicroBlocksCommand extends PlayerCommand {
     }
 
 
-    private void addBlockByName(MicroblockType mbt, Player player) {
+    private void addBlockByName(MicroBlocksType mbt, Player player) {
         addMB(player, mbt.getPlayerName(), mbt.isSafe(), mbt.getBlockName());
         if (mbt.getBlockName().equalsIgnoreCase("parrot")) {
             tell("&6This microblock is &7diagonal&6.");
