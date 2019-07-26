@@ -36,7 +36,7 @@ public class SkullCommand extends PlayerCommand {
     }
 
     @Override
-    void run(final Player player, final String[] args) {
+    protected void run(final Player player, final String[] args) {
         if (args.length != 1) {
             tell("&c"+getUsage());
         } else {

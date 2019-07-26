@@ -12,16 +12,14 @@ public class Types {
     public static final Map<String, MicroBlocksType> PLAYER_MAP = new HashMap<>();
 
     private static void add(String blockName, String playerName) {
-        blockName = blockName.toLowerCase();
-        MicroBlocksType mb = new MicroBlocksType(blockName, playerName, true);
+        MicroBlocksType mb = new MicroBlocksType(blockName.toLowerCase(), playerName, true);
         BLOCK_MAP.put(blockName, mb);
         PLAYER_MAP.put(playerName, mb);
     }
 
     private static void addTexture(String blockName, String texture){
-        blockName = blockName.toLowerCase();
         //TODO: probs should load this from a file and not generate a randomUUID every time
-        MicroBlocksType mb = new MicroBlocksType(blockName, UUID.randomUUID(), texture);
+        MicroBlocksType mb = new MicroBlocksType(blockName.toLowerCase(), UUID.randomUUID(), texture);
         BLOCK_MAP.put(blockName,mb);
     }
 

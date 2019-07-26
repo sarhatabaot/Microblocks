@@ -95,7 +95,7 @@ public class MicroBlocksCommand extends PlayerCommand {
     }
 
     @Override
-    void run(final Player player, final String[] args) {
+    protected void run(final Player player, final String[] args) {
         switch (args.length) {
             case 0:
                 firstPage();
