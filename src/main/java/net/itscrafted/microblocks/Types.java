@@ -8,12 +8,12 @@ import java.util.UUID;
  * @author sarhatabaot
  */
 public class Types {
-    public static final Map<String, MicroblockType> BLOCK_MAP = new HashMap<>();
-    public static final Map<String, MicroblockType> PLAYER_MAP = new HashMap<>();
+    public static final Map<String, MicroBlocksType> BLOCK_MAP = new HashMap<>();
+    public static final Map<String, MicroBlocksType> PLAYER_MAP = new HashMap<>();
 
     private static void add(String blockName, String playerName, boolean safe) {
         blockName = blockName.toLowerCase();
-        MicroblockType mb = new MicroblockType(blockName, playerName, safe);
+        MicroBlocksType mb = new MicroBlocksType(blockName, playerName, safe);
         BLOCK_MAP.put(blockName, mb);
         PLAYER_MAP.put(playerName, mb);
     }
@@ -21,7 +21,7 @@ public class Types {
     private static void add(String blockName, String texture){
         blockName = blockName.toLowerCase();
         //probs should load this from a file and not generate a randomUUID every time
-        MicroblockType mb = new MicroblockType(blockName, UUID.randomUUID(), texture);
+        MicroBlocksType mb = new MicroBlocksType(blockName, UUID.randomUUID(), texture);
         BLOCK_MAP.put(blockName,mb);
     }
 
@@ -57,6 +57,8 @@ public class Types {
         add("ocelot", "MHF_Ocelot", true);
         add("tnt2", "MHF_TNT2", true);
         add("tnt", "MHF_TNT", true);
+        add("spider", "MHF_Spider", true);
+        add("squid", "MHF_Squid", true);
         add("enderchest","eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzc0ZWUxNTQyYzQ1NjNmZDZlN2Q3MmRlMjZlNzM3Y2YxOGZiZDA0Y2NhYjFiOGIyODM1M2RhODczNDhlY2ZiIn19fQ==");
         add("monitor", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzMzZGNmYjRkYTEwMTc3MjY0OTY4YjQ0OWU3MjRhZGViZWUzYmMzM2I3MmJhZTg1ODQyYjRhYWI5YmQ5YzRkYiJ9fX0=");
         add("bookshelf", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTMxODRkNmFkNGEwZTE1YjNhNzFkYWRmNDVmNmM3Y2U5ZWM5NjE3MmJjOWZmMjVmZDNhZjc4N2EzNzliZDEifX19");
@@ -94,65 +96,63 @@ public class Types {
         add("machine", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWE3YjNiMTZlNWQwYzRjZmQyMWM0ZWI5MTMzZTk2OWFhZDdjYzczMDNjY2RmMzE3NTEyZTI2YTQ4NzliNTEifX19");
         add("mossycobblestone", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGQ5MjM4ZWZjOTM0OTNiMTRhNTgyNjM5ZWIwYWE4ODM0ZWFhNDhlMTBiZDRjMjM0ZWIxYTRjMzYzYjQzZDViIn19fQ==");
         add("muffin", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjIwYWI4ZGVmZjlkYzhkODQ1NzhmOWI0ZDY5YTYzZDVmMzg5NDlhMGUzZTlmMWU3Yzk0NzYxMDRkNmQ3MzZiNSJ9fX0=");
-        add("netherrack", "Numba_one_Stunna", false);
-        add("notexture", "ddrl46", false);
-        add("oaklog2", "MightyMega", false);
-        add("obsidian", "loiwiol", false);
-        add("orange", "hi1232", false);
-        add("eyeofender", "Edna_I", true);
-        add("piston", "JL2579", false);
-        add("podzol", "PhasePvP", true);
-        add("popcorn", "ZachWarnerHD", false);
-        add("present", "I_Xenon_I", false);
-        add("pumpkinface", "Koebasti", false);
-        add("quartzblock", "bubbadawg01", true);
-        add("radio", "uioz", true);
-        add("redsand", "OmniSulfur", true);
-        add("redstoneore", "annayirb", false);
-        add("rubixcube", "iTactical17", false);
-        add("sand", "rugofluk", false);
-        add("speaker", "b1418", false);
-        add("spider", "MHF_Spider", true);
-        add("sponge", "pomi44", false);
-        add("squid", "MHF_Squid", true);
-        add("stickypiston", "Panda4994", false);
-        add("stone", "Robbydeezle", false);
-        add("taco", "Crunchy_Taco34", false);
-        add("tv", "Metroidling", false);
-        add("oakplanks", "terryxu", false);
-        add("gamecube", "ReflectedNicK", false);
-        add("redstoneblock", "AlexDr0ps", false);
-        add("tv2", "nonesuchplace", false);
-        add("troll", "Trollface20", false);
-        add("eye", "Taizun", false);
-        add("parrot", "Luk3011", false);
-        add("pokeball", "Chuzard", false);
-        add("cookie", "QuadratCookie", false);
-        add("orangewool", "titou36", false);
-        add("stonebrick", "Cakers", false);
-        add("swskeleton", "lesto123", false);
-        add("goldblock", "StackedGold", false);
-        add("fox", "hugge75", false);
-        add("potato", "CraftPotato13", false);
-        add("leaves2", "half_bit", false);
-        add("cobblestone", "_Rience", true);
-        add("water", "emack0714", false);
-        add("noteblock", "PixelJuke", false);
-        add("brick", "BrickInTheHead", false);
-        add("penguin", "Patty14", false);
-        add("spacehelm", "Dctr_", false);
-        add("terminal", "Hack", false);
-        add("redexclamation", "jona612", false);
-        add("oslime", "md_5", false);
-        add("gslime", "nilaro", false);
-        add("bslime", "Deathbeam", false);
-        add("commandblock", "monkey354", true);
-        add("ironore", "IronBrin", false);
-        add("socialicons", "titigogo70", false);
-        add("redstonetorch", "RedstoneMakerMe", false);
-        add("portal", "TorchPvP", false);
-        add("package", "ku228", false);
-        add("bedrock", "BedrockSolid", true);
+        add("netherrack", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTU2Y2E1YzY3OTMzNmRkNGYzMjYyZjRmYmMyM2MxYTJlZTBkODJhN2ZkODFlNmU2MjMzN2U1ZmQ1YzcifX19");
+        add("missingtexture", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWM5MGNhNTA3M2M0OWI4OThhNmY4Y2RiYzcyZTZhY2EwYTQyNWVjODNiYzQzNTVlM2I4MzRmZDg1OTI4MmJkZCJ9fX0=");
+        add("oaklog2", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTRhYWRhNGQ5ZmNlZGE5MDE4NjkxOGQ2Y2EzNWI5YTBlYWQ4ZTRiMTRjOWQ5NDI3MTU3ZWU5YjkzMzlkN2IxIn19fQ==");
+        add("obsidian", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzg0MGI4N2Q1MjI3MWQyYTc1NWRlZGM4Mjg3N2UwZWQzZGY2N2RjYzQyZWE0NzllYzE0NjE3NmIwMjc3OWE1In19fQ==");
+        add("orange", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWZkMGUzMzBhNjg4ZDhiYjk1MTliZWZlMWJmYzM0MzM3YjM3MWFjNzUxNTAyMTZmZGQwMzk1OWViN2I0NCJ9fX0=");
+        add("eyeofender", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhOGZjOGRlNjQxN2I0OGQ0OGM4MGI0NDNjZjUzMjZlM2Q5ZGE0ZGJlOWIyNWZjZDQ5NTQ5ZDk2MTY4ZmMwIn19fQ==");
+        add("piston", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI3NDNhOGJlYTc1MmQ2ZGFmNjcyZGVhMzY3ZTFhNWQzOThhZWNiZTBjM2M4NDgzYTkwZWM5YWM0NDEyYTQxIn19fQ==");
+        add("podzol", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjcwN2JjODcyZTEzMmQ3NjRiYmVlMDhjYzA4NDAxNTUyOWNhZTU1ZmI5NzQ3NDcxYjllNTkzOTAzZmY5YWVlIn19fQ==");
+        add("popcorn", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWViZjRiZDhkMjE2OWYxMDI3MzhiZmUyYmY3Y2ZlZDY5NTc3YjdjZjY3MjFhZmI3YTYyNGE4NTcwM2JiZDRiIn19fQ==");
+        add("present", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNmNlZjlhYTE0ZTg4NDc3M2VhYzEzNGE0ZWU4OTcyMDYzZjQ2NmRlNjc4MzYzY2Y3YjFhMjFhODViNyJ9fX0=");
+        add("pumpkinface", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjM2NGUwMjUyOWYzOGZiN2FmZTZkMDlkYTY0NmFjZWJiMGNiMDM4MzEzNThhOWQ4NjMwOWMzYTNmMWIyNzQ2YiJ9fX0=");
+        add("jackolantern","eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2NlZDRiY2ZkMjExNjQ2NGRlZGYxNTdiZmM2MmRiMjZjOTU3YTlhNmFjOGJiYzUyNTYzNDY3MDg1YmUyMyJ9fX0=");
+        add("quartzblock", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTVlMmIyZWQyOThiNTNjYzg0NzgzY2Q3ODVlYzU3ZGE0OWNlYWFiZGNmZjMxYjI1ZmU1MjU2YjM0MjliNDEyIn19fQ==");
+        add("radio", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGMzYzg1MTc1MTZmOGQ4ZTgwNjc3ODFlN2M2MmVlYTI3ZGU0NzhiMTRjNGE2OGM4ZThjMWFkOGFmMWJhZTIxIn19fQ==");
+        add("redsand", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTNjYjU0NjRhYjliODUxYjlkNGFjOGI4Y2RiYjg2NWU3NGM1ODliMzQ4NWFiZWNlNTg5ZDQyOWQ4OTlhZWQifX19");
+        add("redstoneore", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTRkOTQzYTZlOWM3NTU2ODViOThiNGYxMmEyMjg3NjdlMGM2Zjk4MGRmYzFlYTI2NTBhOGEwNjcyNmM3ZDIyZiJ9fX0=");
+        add("rubikscube", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWFhZTdlODIyMmRkYmVlMTlkMTg0Yjk3ZTc5MDY3ODE0YjZiYTMxNDJhM2JkY2NlOGI5MzA5OWEzMTIifX19");
+        add("sand", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTMzOThhYjNjYjY5NmIzNDQzMGJlOTQ0YjE0YWZiZDIyN2ZkODdlOTkwMjZiY2ZjOGI3Mzg3YTg2MWJkZSJ9fX0=");
+        add("speaker", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWQzOTFiNWZkMzU5YmU1YjNhOTYwYmU1NTIzN2Y2NjM1ZWE1YmQzZDc3ODNiZjYwZGQ2NTVmMjExMGJiOTMifX19");
+        add("sponge", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjA3YThlZDJiZDIzMGZkNzliZjA3Y2VhMmMzOTIzNDAxNjZlNjA2YTg4NzE5MGQ1OThkNmU1YmM5YTYyYzZhNCJ9fX0=");
+        add("stickypiston", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2NhNGQyMThkZjlkMzJjZDQ3ZDljMWQyOTQ4NzcxMjJiZTU5MTliNDE4YTZjYzNkMDg5MTYyYjEzM2YyZGIifX19");
+        add("stone", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTU0ODE4MjMzYzgxMTg3M2U4NWY1YTRlYTQ0MjliNzVmMjNiNmFlMGVhNmY1ZmMwZjdiYjQyMGQ3YzQ3MSJ9fX0=");
+        add("taco", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWFkN2MwYTA0ZjE0ODVjN2EzZWYyNjFhNDhlZTgzYjJmMWFhNzAxYWIxMWYzZmM5MTFlMDM2NmE5Yjk3ZSJ9fX0=");
+        add("tv", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWQxZTk5NzkyODlmMDMwOTlhN2M1ODdkNTJkNDg4ZTI2ZTdiYjE3YWI1OTRiNjlmOTI0MzhkNzdlYWJjIn19fQ==");
+        add("tv2", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2Y0YjhjOWYzMzc4NjkxNTllZDMxYTcxYmQ1MDNiNzI1YjJlZTI2NGE2ZWIxMWU1OGU2NTdlMWE4YTk5YyJ9fX0=");
+        add("oakplanks", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTBmOTZkOWI3MjMwM2YzNzI3OWZhOWMyY2MyM2VlNmY4ZGI2ODIzNjg1YjYyNmI1NmVkNTNiNjc0YjZiMCJ9fX0=");
+        add("gamecube", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTI1NmY3ZmY1MmU3YmZkODE4N2I4M2RkMzRkZjM0NTAyOTUyYjhkYjlmYWZiNzI4OGViZWJiNmU3OGVmMTVmIn19fQ==");
+        add("redstoneblock", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmI3OGZhNWRlZmU3MmRlYmNkOWM3NmFiOWY0ZTExNDI1MDQ3OWJiOWI0NGY0Mjg4N2JiZjZmNzM4NjEyYiJ9fX0=");
+        add("troll", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGY3ZjQwYTg2YmVlOGUyMWE1NTM0MDg1NmE4NjIxYWNhNDk1NjczYWExN2JmZGUxOGQzYjdhYTYxYjQyYyJ9fX0=");
+        add("eye", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDU1NTYwODNjOWNkZTE5ZjU0YmY3OGE0MjFjYjk3MzFmNjBmMWQzZGUzY2Y1ODRmNTRiMmQ0MzY3N2RmMmE3In19fQ==");
+        add("parrot", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjBiZmE4NTBmNWRlNGIyOTgxY2NlNzhmNTJmYzJjYzdjZDdiNWM2MmNhZWZlZGRlYjljZjMxMWU4M2Q5MDk3In19fQ==");
+        add("pokeball", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWZlNDc2NDA4NDM3NDRjZDU3OTY5NzlkMTE5NmZiOTM4MzE3ZWM0MmIwOWZjY2IyYzU0NWVlNGM5MjVhYzJiZCJ9fX0=");
+        add("cookie", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjQxMTQ4NTcwYWQ5ZTEyMDQ0MjA1ZDYzMmE0MzcxNjNlZDFjZDhkMjljN2RjNWIyOTJiNmY1NDc4MjZhZjE2In19fQ==");
+        add("orangewool", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2JmNzc5N2EyNGE2YWY4NzVmNWM4MjcxYzViOGM0MjVlMTlmMzcyYTQxNWUwNTUyZmMyNDc3NjNmMjg1OWQxIn19fQ==");
+        add("stonebrick", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODhiNzY3YzhhMWVhOGU0MDRiM2NjYTg1MzQ5ZjY1M2I1N2IwYzNmNDY0MjdmYmVjZWFjY2YzNjAyYmMyOWUifX19");
+        add("chimney","eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzA1OGVjNGQzOTIwYWRiZmE4NjU1MGY1ODUyNDIyZTFhZjU1MDU0YTE1YWZjOWMyYzkyMmQ1ODc2NWZhYTViIn19fQ==");
+        add("goldblock", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNTRiZjg5M2ZjNmRlZmFkMjE4Zjc4MzZlZmVmYmU2MzZmMWMyY2MxYmI2NTBjODJmY2NkOTlmMmMxZWU2In19fQ==");
+        add("fox", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjRhMDM0NzQzNjQzNGViMTNkNTM3YjllYjZiNDViNmVmNGM1YTc4Zjg2ZTkxODYzZWY2MWQyYjhhNTNiODIifX19");
+        add("potato", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGJmYjZkNGE1NGMxN2UyNzQ4NDM3YWNjNzA5OGZiYjFhM2ExMmE0MDdmNTFiM2U0OTU0MjMzMjcxNDg0NmZkOCJ9fX0=");
+        add("leavesbarrel", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGUxN2Q5MzRiNDY1ZjUyNmE4Mzc2NmZhZmMwNGIyNzRkMmYxMTFhNDE2MThlMzY3OTcwNmJhODUxY2E4ZiJ9fX0=");
+        add("cobblestone", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGMxNzU0ODUxZTM2N2U4YmViYTJhNmQ4ZjdjMmZlZGU4N2FlNzkzYWM1NDZiMGYyOTlkNjczMjE1YjI5MyJ9fX0=");
+        add("water", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzRmY2JjMjU2ZDBiZTdlNjgzYWY4NGUzOGM0YmNkYjcxYWZiOTM5ODUzOGEyOWFhOTZjYmZhMzE4YjJlYSJ9fX0=");
+        add("noteblock", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGNlZWI3N2Q0ZDI1NzI0YTljYWYyYzdjZGYyZDg4Mzk5YjE0MTdjNmI5ZmY1MjEzNjU5YjY1M2JlNDM3NmUzIn19fQ==");
+        add("brick", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2UyNWJjNDJkNDExNDkxOThjOGM1MjNjMjM5MjA3MzdiOWNlZGRhOWE5OWVkYTUzZjMyMzJmNDg5NjQifX19");
+        add("penguin", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODkzZGNjMjNjZTNjYmE1MTU0ZjY3ZDNlMzc1OTllMWQ0YzRmOWI3M2M4Y2MwMGJmNmE1M2JiZjYyZGI4OWI0YiJ9fX0=");
+        add("spacehelm", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2U4YWFkNjczMTU3YzkyMzE3YTg4YjFmODZmNTI3MWYxY2Q3Mzk3ZDdmYzhlYzMyODFmNzMzZjc1MTYzNCJ9fX0=");
+        add("terminal", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWRjMWQzMGM2YTY1MTcxMjhkN2JiN2EyOWU3YWM3YWM1NmQxZmJlMjA3NmYzMDhkZmQ5Y2E1M2NmMmJmODdjNiJ9fX0=");
+        add("redexclamation", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTdmOWM2ZmVmMmFkOTZiM2E1NDY1NjQyYmE5NTQ2NzFiZTFjNDU0M2UyZTI1ZTU2YWVmMGE0N2Q1ZjFmIn19fQ==");
+        add("oslime", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzRhMzM0NjkwOTk0OGY0ZmM3MmI2N2Y1YTIzOWFjYTMyMTU1MDBkMDdjY2Q0Nzg4YTc3ZTg3NWEyMTM1NjViNiJ9fX0=");
+        add("gslime", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODk1YWVlYzZiODQyYWRhODY2OWY4NDZkNjViYzQ5NzYyNTk3ODI0YWI5NDRmMjJmNDViZjNiYmI5NDFhYmU2YyJ9fX0=");
+        add("bslime", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzI4NWNhYTJjM2NiOGExZWE4ZjJmN2UyZWNhZWU0NGFmYjIxYzYyMjExZGVhNmZkM2MxMzdiMjJiYjg2NzM0ZiJ9fX0=");
+        add("commandblock", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNWY0YzIxZDE3YWQ2MzYzODdlYTNjNzM2YmZmNmFkZTg5NzMxN2UxMzc0Y2Q1ZDliMWMxNWU2ZTg5NTM0MzIifX19");
+        add("ironore", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTAxODQzZWM0M2YwODhjOTYzZmZjM2UyZjcxYzY2ZTMxNTU5NDNiMTc3YTFhMzU5ODJiMTIwZjZmNjQ4MjJiYyJ9fX0=");
+        add("redstonetorch", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzJiMGEyNzA5YWQyN2M1NzgzYmE3YWNiZGFlODc4N2QxNzY3M2YwODg4ZjFiNmQ0ZTI0ZWUxMzI5OGQ0In19fQ==");
+        add("portal", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjBiZmMyNTc3ZjZlMjZjNmM2ZjczNjVjMmM0MDc2YmNjZWU2NTMxMjQ5ODkzODJjZTkzYmNhNGZjOWUzOWIifX19");
+        add("package", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDc3OWIyMWU1YmQ0OWExNzMwZWQ3NWI2YTBhZTljNGExYmFkYjQ4MjQ0ZGI3MjZjMzMzNjAyODE5NDU0NDI4ZSJ9fX0=");
+        add("bedrock", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzZkMWZhYmRmM2UzNDI2NzFiZDlmOTVmNjg3ZmUyNjNmNDM5ZGRjMmYxYzllYThmZjE1YjEzZjFlN2U0OGI5In19fQ==");
     }
 
 }
