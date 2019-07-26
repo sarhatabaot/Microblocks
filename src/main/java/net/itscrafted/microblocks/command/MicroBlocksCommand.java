@@ -43,12 +43,12 @@ public class MicroBlocksCommand extends PlayerCommand {
     }
 
     private void helpCommand() {
-        tell("&6Microblocks &7v" + MicroBlocks.getInstance().getDescription().getVersion() + "&6by&7" + MicroBlocks.getInstance().getDescription().getAuthors().toString() + "&6.",
-                "&c/mb &14for a list of blocks.",
-                "&c/mb <block> &14to spawn a microblock.",
-                "&c/mb reload &14to reload the configuration.",
-                "&c/skull <player/self> &14to spawn a skull",
-                "&c/givemb <player> <microblock> &14to give Microblocks to others.");
+        tell("&6Microblocks &7v" + MicroBlocks.getInstance().getDescription().getVersion() + " &6by&7 " + MicroBlocks.getInstance().getDescription().getAuthors().toString() + "&6.",
+                "&c/mb &efor a list of blocks.",
+                "&c/mb <block> &eto spawn a microblock.",
+                "&c/mb reload &eto reload the configuration.",
+                "&c/skull <player/self> &eto spawn a skull",
+                "&c/givemb <player> <microblock> &eto give Microblocks to others.");
     }
 
     private void reloadCommand() {
