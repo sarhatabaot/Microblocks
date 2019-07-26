@@ -73,19 +73,19 @@ public class MicroBlocksCommand extends PlayerCommand {
             case "about":
             case "help":
                 helpCommand();
-                return;
+                break;
             case "reload":
                 reloadCommand();
-                return;
+                break;
             case "2":
                 secondPage();
-                return;
+                break;
             default:
                 if (Types.BLOCK_MAP.containsKey(args[0].toLowerCase())) {
                     MicroBlocksType mbt = Types.BLOCK_MAP.get(args[0].toLowerCase());
                     if (mbt.getPlayerName() == null) {
                         Util.addMB(player,mbt.getUuid(),mbt.getBlockName(),mbt.getTexture());
-                        return;
+                        break;
                     }
                     Util.addBlockByName(mbt, player);
                 } else {

@@ -27,7 +27,7 @@ public abstract class PlayerCommand extends Command {
         return true;
     }
 
-    abstract void run(Player player, String[] args);
+    protected abstract void run(Player player, String[] args);
 
     protected void tell(String message){
         Common.tell(player,message);
