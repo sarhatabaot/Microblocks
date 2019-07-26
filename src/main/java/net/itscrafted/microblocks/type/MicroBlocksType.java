@@ -1,4 +1,4 @@
-package net.itscrafted.microblocks;
+package net.itscrafted.microblocks.type;
 
 import lombok.Getter;
 import lombok.ToString;

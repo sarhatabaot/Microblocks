@@ -1,21 +1,15 @@
 package net.itscrafted.microblocks.command;
 
-import io.github.thebusybiscuit.cscorelib2.skull.SkullItem;
-import net.itscrafted.microblocks.MicroBlocksType;
-import net.itscrafted.microblocks.MicroBlocks;
-import net.itscrafted.microblocks.Types;
-import org.bukkit.Bukkit;
+import net.itscrafted.microblocks.*;
+import net.itscrafted.microblocks.type.MicroBlocksType;
+import net.itscrafted.microblocks.type.Types;
+import net.itscrafted.microblocks.util.Util;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.logging.Logger;
 
 public class MicroBlocksCommand extends PlayerCommand {
     private String[] blocks;
@@ -46,41 +40,6 @@ public class MicroBlocksCommand extends PlayerCommand {
             }
             return sb.substring(4);
         }
-    }
-
-    private ItemStack mblock(String headName, String microblock) {
-        ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD);
-        SkullMeta meta = (SkullMeta) playerHead.getItemMeta();
-        meta.setDisplayName(ChatColor.GOLD + "Microblock: " + ChatColor.WHITE + microblock);
-        meta.setOwningPlayer(Bukkit.getOfflinePlayer(headName));
-        meta.setLore(Collections.singletonList(ChatColor.GRAY + "Smaller than a block."));
-        playerHead.setItemMeta(meta);
-        return playerHead;
-    }
-
-
-    private ItemStack mblock(UUID uuid, String microblock, String texture) {
-        ItemStack head = SkullItem.fromBase64(uuid, texture);
-        SkullMeta meta = (SkullMeta) head.getItemMeta();
-        meta.setDisplayName(ChatColor.GOLD + "Microblock:" + ChatColor.WHITE + microblock);
-        meta.setLore(Collections.singletonList(ChatColor.GRAY + "Smaller than a block."));
-        head.setItemMeta(meta);
-        return head;
-    }
-
-    public void addMB(Player p, String headName, boolean safe, String microblock) {
-        if (MicroBlocks.getInstance().getConfig().getBoolean("safe-mode") && !safe) {
-            tell("&6This is an &cunsafe head &6, you cannot use it.", "&6If you wish to use it, disable &c'safe-mode' &6in the config.");
-        } else {
-            p.getInventory().addItem(mblock(headName, microblock));
-            tell("&6You have been given the &7" + microblock + " &6microblock.");
-        }
-    }
-
-
-    public void addMB(Player p, UUID uuid, String microblock, String texture) {
-        p.getInventory().addItem(mblock(uuid, microblock, texture));
-        tell("&6You have been given the &7" + microblock + " &6microblock.");
     }
 
     private void helpCommand() {
@@ -125,21 +84,13 @@ public class MicroBlocksCommand extends PlayerCommand {
                 if (Types.BLOCK_MAP.containsKey(args[0].toLowerCase())) {
                     MicroBlocksType mbt = Types.BLOCK_MAP.get(args[0].toLowerCase());
                     if (mbt.getPlayerName() == null) {
-                        addMB(player,mbt.getUuid(),mbt.getBlockName(),mbt.getTexture());
+                        Util.addMB(player,mbt.getUuid(),mbt.getBlockName(),mbt.getTexture());
                         return;
                     }
-                    addBlockByName(mbt, player);
+                    Util.addBlockByName(mbt, player);
                 } else {
                     tell("&cUnknown microblock!", "&cUse /mb for a list of microblocks.");
                 }
-        }
-    }
-
-
-    private void addBlockByName(MicroBlocksType mbt, Player player) {
-        addMB(player, mbt.getPlayerName(), mbt.isSafe(), mbt.getBlockName());
-        if (mbt.getBlockName().equalsIgnoreCase("parrot")) {
-            tell("&6This microblock is &7diagonal&6.");
         }
     }
 
@@ -157,27 +108,25 @@ public class MicroBlocksCommand extends PlayerCommand {
         }
     }
 
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (command.getLabel().equalsIgnoreCase("microblocks")) {
-            List<String> completions = new ArrayList<>();
-            if ("2".startsWith(args[0])) {
-                completions.add("2");
-            }
-
-            if ("reload".startsWith(args[0])) {
-                completions.add("reload");
-            }
-
-            for (final String key : Types.BLOCK_MAP.keySet()) {
-                if (key.startsWith(args[0])) {
-                    completions.add(key);
-                }
-            }
-
-            completions.sort(String.CASE_INSENSITIVE_ORDER);
-            return completions;
-        } else {
-            return Collections.emptyList();
+    @Override
+    @NotNull
+    public List<String> tabComplete(@NotNull final CommandSender sender, @NotNull final String alias, @NotNull final String[] args) throws IllegalArgumentException {
+        List<String> completions = new ArrayList<>();
+        if ("2".startsWith(args[0])) {
+            completions.add("2");
         }
+
+        if ("reload".startsWith(args[0])) {
+            completions.add("reload");
+        }
+
+        for (final String key : Types.BLOCK_MAP.keySet()) {
+            if (key.startsWith(args[0])) {
+                completions.add(key);
+            }
+        }
+
+        completions.sort(String.CASE_INSENSITIVE_ORDER);
+        return completions;
     }
 }

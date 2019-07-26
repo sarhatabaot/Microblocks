@@ -3,8 +3,6 @@ name: Microblocks
 version: ${project.version}
 description: ${project.description}
 api-version: "1.13"
-
 authors:
   - itsCrafted
   - sarhatabaot
-

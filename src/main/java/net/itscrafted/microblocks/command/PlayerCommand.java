@@ -1,12 +1,12 @@
 package net.itscrafted.microblocks.command;
 
-import net.itscrafted.microblocks.Common;
+import net.itscrafted.microblocks.util.Common;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import static net.itscrafted.microblocks.Common.colorize;
+import static net.itscrafted.microblocks.util.Common.colorize;
 
 public abstract class PlayerCommand extends Command {
     private Player player;

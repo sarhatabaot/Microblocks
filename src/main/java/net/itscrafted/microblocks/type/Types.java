@@ -1,4 +1,4 @@
-package net.itscrafted.microblocks;
+package net.itscrafted.microblocks.type;
 
 import java.util.HashMap;
 import java.util.Map;
