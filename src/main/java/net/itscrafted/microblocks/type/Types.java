@@ -7,10 +7,12 @@ import java.util.UUID;
 /**
  * @author sarhatabaot
  */
+@Deprecated
 public class Types {
     public static final Map<String, MicroBlocksType> BLOCK_MAP = new HashMap<>();
     public static final Map<String, MicroBlocksType> PLAYER_MAP = new HashMap<>();
 
+    @Deprecated
     private static void add(String blockName, String playerName) {
         MicroBlocksType mb = new MicroBlocksType(blockName.toLowerCase(), playerName, true);
         BLOCK_MAP.put(blockName, mb);
@@ -24,8 +26,8 @@ public class Types {
     }
 
     static {
-        add("apple", "MHF_Apple");
-        add("arrowdown", "MHF_ArrowDown");
+        addTexture("apple", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2JiMzExZjNiYTFjMDdjM2QxMTQ3Y2QyMTBkODFmZTExZmQ4YWU5ZTNkYjIxMmEwZmE3NDg5NDZjMzYzMyJ9fX0=");
+        addTexture("arrowdown", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzQzNzM0NmQ4YmRhNzhkNTI1ZDE5ZjU0MGE5NWU0ZTc5ZGFlZGE3OTVjYmM1YTEzMjU2MjM2MzEyY2YifX19");
         add("arrowleft", "MHF_ArrowLeft");
         add("arrowright", "MHF_ArrowRight");
         add("arrowup", "MHF_ArrowUp");

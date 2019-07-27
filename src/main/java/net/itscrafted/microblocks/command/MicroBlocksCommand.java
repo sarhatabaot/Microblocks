@@ -1,7 +1,7 @@
 package net.itscrafted.microblocks.command;
 
 import net.itscrafted.microblocks.*;
-import net.itscrafted.microblocks.type.MicroBlocksType;
+import net.itscrafted.microblocks.type.MicroBlock;
 import net.itscrafted.microblocks.type.Types;
 import net.itscrafted.microblocks.util.Util;
 import org.bukkit.ChatColor;
@@ -23,9 +23,8 @@ public class MicroBlocksCommand extends PlayerCommand {
         setPermission("mb.use");
         setUsage("Usage: /mb <block>");
 
-        this.blocks = Types.BLOCK_MAP.keySet().toArray(new String[0]);
-        this.totalLength = this.blocks.length;
-        Arrays.sort(this.blocks);
+        this.blocks = MicroBlock.getBY_NAME().keySet().toArray(new String[0]);
+        this.totalLength = blocks.length;
         this.secondPage = Arrays.copyOfRange(this.blocks, this.totalLength / 2, this.totalLength);
         this.blocks = Arrays.copyOfRange(this.blocks, 0, this.totalLength / 2);
     }
@@ -81,13 +80,15 @@ public class MicroBlocksCommand extends PlayerCommand {
                 secondPage();
                 break;
             default:
-                if (Types.BLOCK_MAP.containsKey(args[0].toLowerCase())) {
-                    MicroBlocksType mbt = Types.BLOCK_MAP.get(args[0].toLowerCase());
+                if (MicroBlock.getBY_NAME().containsKey(args[0])) {
+                    MicroBlock microBlock = MicroBlock.getMicroBlock(args[0]);
+                    Util.addMicroBlock(player,microBlock);
+                    /*MicroBlocksType mbt = Types.BLOCK_MAP.get(args[0].toLowerCase());
                     if (mbt.getPlayerName() == null) {
                         Util.addMB(player,mbt.getUuid(),mbt.getBlockName(),mbt.getTexture());
                         break;
                     }
-                    Util.addBlockByName(mbt, player);
+                    Util.addBlockByName(mbt, player); */
                 } else {
                     tell("&cUnknown microblock!", "&cUse /mb for a list of microblocks.");
                 }

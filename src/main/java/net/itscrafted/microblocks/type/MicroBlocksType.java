@@ -7,6 +7,7 @@ import java.util.UUID;
 
 @Getter
 @ToString
+@Deprecated
 public class MicroBlocksType {
     private String blockName;
     private String playerName;
