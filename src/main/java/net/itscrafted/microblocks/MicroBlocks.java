@@ -22,7 +22,7 @@ public class MicroBlocks extends JavaPlugin {
         Common.registerCommand(new SkullCommand());
         Common.registerCommand(new GiveMBCommand());
 
-        this.getLogger().info("The current plugin version is " + this.getDescription().getVersion() + ". Please use this" + " when sending reports of mismatched heads and such.");
+        this.getLogger().info("MicroBlocks v" + this.getDescription().getVersion() + " enabled!");
     }
 
     @Override

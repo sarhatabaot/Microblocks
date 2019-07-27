@@ -1,8 +1,7 @@
 package net.itscrafted.microblocks.command;
 
-import net.itscrafted.microblocks.*;
+import net.itscrafted.microblocks.MicroBlocks;
 import net.itscrafted.microblocks.type.MicroBlock;
-import net.itscrafted.microblocks.type.Types;
 import net.itscrafted.microblocks.util.Util;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -24,6 +23,7 @@ public class MicroBlocksCommand extends PlayerCommand {
         setUsage("Usage: /mb <block>");
 
         this.blocks = MicroBlock.getBY_NAME().keySet().toArray(new String[0]);
+        Arrays.sort(blocks);
         this.totalLength = blocks.length;
         this.secondPage = Arrays.copyOfRange(this.blocks, this.totalLength / 2, this.totalLength);
         this.blocks = Arrays.copyOfRange(this.blocks, 0, this.totalLength / 2);
@@ -83,12 +83,6 @@ public class MicroBlocksCommand extends PlayerCommand {
                 if (MicroBlock.getBY_NAME().containsKey(args[0])) {
                     MicroBlock microBlock = MicroBlock.getMicroBlock(args[0]);
                     Util.addMicroBlock(player,microBlock);
-                    /*MicroBlocksType mbt = Types.BLOCK_MAP.get(args[0].toLowerCase());
-                    if (mbt.getPlayerName() == null) {
-                        Util.addMB(player,mbt.getUuid(),mbt.getBlockName(),mbt.getTexture());
-                        break;
-                    }
-                    Util.addBlockByName(mbt, player); */
                 } else {
                     tell("&cUnknown microblock!", "&cUse /mb for a list of microblocks.");
                 }
@@ -121,7 +115,7 @@ public class MicroBlocksCommand extends PlayerCommand {
             completions.add("reload");
         }
 
-        for (final String key : Types.BLOCK_MAP.keySet()) {
+        for (final String key : MicroBlock.getBY_NAME().keySet()) {
             if (key.startsWith(args[0])) {
                 completions.add(key);
             }

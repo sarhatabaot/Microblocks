@@ -156,10 +156,6 @@ public enum MicroBlock {
         return BY_NAME.get(string);
     }
 
-    public static MicroBlock matchMicroBlock(String string){
-        return BY_NAME.get(string.toLowerCase());
-    }
-
     static {
         for(MicroBlock type: values()){
             BY_NAME.put(type.name,type);
