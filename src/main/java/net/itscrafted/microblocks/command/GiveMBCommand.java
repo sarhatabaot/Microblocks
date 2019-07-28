@@ -29,7 +29,7 @@ public class GiveMBCommand extends Command {
         Common.tell(sender, message);
     }
 
-    private void addMB(Player player, MicroBlock microBlock, int amount){
+    private void addMB(Player player, MicroBlock microBlock, int amount) {
         ItemStack block = Util.mblock(microBlock);
         block.setAmount(amount);
         player.getInventory().addItem(block);
@@ -39,35 +39,33 @@ public class GiveMBCommand extends Command {
     @Override
     public boolean execute(@NotNull final CommandSender sender, @NotNull final String commandLabel, @NotNull final String[] args) {
         this.sender = sender;
-        switch (args.length) {
-            case 2:
-            case 3:
-                Player receiver = Bukkit.getPlayerExact(args[0]);
-                if (receiver == null || args[0].length() > 20) {
-                    tell("&c'" + args[0] + "' is not online or is an invalid player name");
-                    return true;
-                }
+        if (args.length < 2 || args.length > 3)
+            return false;
 
-                if (!MicroBlock.getBY_NAME().containsKey(args[1].toLowerCase())) {
-                    tell("&cUnknown microblock");
-                    tell("&cUse /mb for a list of microblocks");
-                    return true;
-                }
-
-                MicroBlock microBlock = MicroBlock.getMicroBlock(args[1].toLowerCase());
-
-                try {
-                    addMB(receiver,microBlock,Integer.parseInt(args[2]));
-                    tell("&6You have given &7" + args[0] + "&6 " + args[2] + " &6of the &7" + args[1] + " &6microblock.");
-                } catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {
-                    addMB(receiver,microBlock,1);
-                    tell("&6You have given &7" + args[0] + "&6 1 &6of the &7" + args[1] + " &6microblock.");
-                }
-
-                return true;
-            default:
-                return false;
+        Player receiver = Bukkit.getPlayerExact(args[0]);
+        if (receiver == null || args[0].length() > 20) {
+            tell("&c'" + args[0] + "' is not online or is an invalid player name");
+            return true;
         }
+
+        if (!MicroBlock.getBY_NAME().containsKey(args[1].toLowerCase())) {
+            tell("&cUnknown microblock");
+            tell("&cUse /mb for a list of microblocks");
+            return true;
+        }
+
+        MicroBlock microBlock = MicroBlock.getMicroBlock(args[1].toLowerCase());
+
+        try {
+            addMB(receiver, microBlock, Integer.parseInt(args[2]));
+            tell("&6You have given &7" + args[0] + "&6 " + args[2] + " &6of the &7" + args[1] + " &6microblock.");
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {
+            addMB(receiver, microBlock, 1);
+            tell("&6You have given &7" + args[0] + "&6 1 &6of the &7" + args[1] + " &6microblock.");
+        }
+
+        return true;
+
     }
 
     @Override
