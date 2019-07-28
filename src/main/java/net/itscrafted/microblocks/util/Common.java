@@ -12,6 +12,9 @@ import java.lang.reflect.Field;
  * @author sarhatabaot
  */
 public class Common {
+    private Common() {
+        throw new IllegalStateException("Common class.");
+    }
     public static String colorize(String message){
         return ChatColor.translateAlternateColorCodes('&',message);
     }
@@ -37,4 +40,5 @@ public class Common {
             e.printStackTrace();
         }
     }
+
 }

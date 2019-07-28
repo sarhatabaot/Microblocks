@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.itscrafted.microblocks.*;
-import net.itscrafted.microblocks.type.MicroBlocksType;
-import net.itscrafted.microblocks.type.Types;
+import net.itscrafted.microblocks.type.MicroBlock;
 import net.itscrafted.microblocks.util.Common;
 import net.itscrafted.microblocks.util.Util;
 import org.bukkit.Bukkit;
@@ -31,17 +29,11 @@ public class GiveMBCommand extends Command {
         Common.tell(sender, message);
     }
 
-    public void addMB(Player p, String headName, boolean safe, String microblock, int amount) {
-        if (MicroBlocks.getInstance().getConfig().getBoolean("safe-mode") && !safe) {
-            tell("&6This is an &cunsafe head &6, you cannot use it");
-            tell("&6If you wish to use it, disable &c'safe-mode' &6in the config.");
-        } else {
-            ItemStack block = Util.mblock(headName, microblock);
-            block.setAmount(amount);
-            p.getInventory().addItem(block);
-            tell("&6You have been given the &7" + microblock + " &6microblock.");
-        }
-
+    private void addMB(Player player, MicroBlock microBlock, int amount){
+        ItemStack block = Util.mblock(microBlock);
+        block.setAmount(amount);
+        player.getInventory().addItem(block);
+        tell("&6You have been given the &7" + Util.format(microBlock.getName()) + " &6microblock.");
     }
 
     @Override
@@ -55,18 +47,20 @@ public class GiveMBCommand extends Command {
                     tell("&c'" + args[0] + "' is not online or is an invalid player name");
                     return true;
                 }
-                if (!Types.BLOCK_MAP.containsKey(args[1].toLowerCase())) {
+
+                if (!MicroBlock.getBY_NAME().containsKey(args[1].toLowerCase())) {
                     tell("&cUnknown microblock");
                     tell("&cUse /mb for a list of microblocks");
                     return true;
                 }
 
-                MicroBlocksType mbt = Types.BLOCK_MAP.get(args[1].toLowerCase());
+                MicroBlock microBlock = MicroBlock.getMicroBlock(args[1].toLowerCase());
+
                 try {
-                    this.addMB(receiver, mbt.getPlayerName(), mbt.isSafe(), mbt.getBlockName(), Integer.parseInt(args[2]));
+                    addMB(receiver,microBlock,Integer.parseInt(args[2]));
                     tell("&6You have given &7" + args[0] + "&6 " + args[2] + " &6of the &7" + args[1] + " &6microblock.");
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {
-                    this.addMB(receiver, mbt.getPlayerName(), mbt.isSafe(), mbt.getBlockName(), 1);
+                    addMB(receiver,microBlock,1);
                     tell("&6You have given &7" + args[0] + "&6 1 &6of the &7" + args[1] + " &6microblock.");
                 }
 
@@ -84,7 +78,7 @@ public class GiveMBCommand extends Command {
                 completions.add(player.getName());
         }
         if (args.length > 1) {
-            for (final String key : Types.BLOCK_MAP.keySet()) {
+            for (final String key : MicroBlock.getBY_NAME().keySet()) {
                 if (key.startsWith(args[1])) {
                     completions.add(key);
                 }
